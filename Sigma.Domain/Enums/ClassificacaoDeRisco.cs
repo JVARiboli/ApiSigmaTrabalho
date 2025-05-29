@@ -2,7 +2,7 @@
 
 namespace Sigma.Domain.Enums
 {
-    public enum ClassificaçãoDeRisco
+    public enum ClassificacaoDeRisco
     {
         [Display(Name = "Baixo")]
         Baixo,

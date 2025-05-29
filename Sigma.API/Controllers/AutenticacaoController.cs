@@ -8,11 +8,11 @@ namespace Sigma.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    public class AutenticacaoController : ControllerBase
     {
         private readonly IAutenticacaoService _authService;
 
-        public AuthController(IAutenticacaoService authService)
+        public AutenticacaoController(IAutenticacaoService authService)
         {
             _authService = authService;
         }

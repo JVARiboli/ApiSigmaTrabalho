@@ -204,7 +204,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async event => 
     const senha = event.target.password.value.trim();
 
     try {
-        const resposta = await fetch(`${baseApiUrl}/auth/login`, {
+        const resposta = await fetch(`${baseApiUrl}/autenticacao/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: usuario, password: senha }),
