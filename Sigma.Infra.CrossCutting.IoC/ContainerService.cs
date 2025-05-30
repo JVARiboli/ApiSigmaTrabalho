@@ -16,10 +16,11 @@ namespace Sigma.Infra.CrossCutting.IoC
 
     public static class ContainerService
     {
-        public static IServiceCollection AddApplicationServicesCollentions(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServicesCollentions(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddServices();
             services.AddRepositories();
+            services.AddApplicationAuthentication(configuration);
             return services;
         }
 
@@ -27,6 +28,7 @@ namespace Sigma.Infra.CrossCutting.IoC
         {
             services.AddScoped<IProjetoService, ProjetoService>();
             services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+            
             return services;
         }
 
@@ -37,24 +39,24 @@ namespace Sigma.Infra.CrossCutting.IoC
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-             .AddJwtBearer(x =>
-             {
-                 x.RequireHttpsMetadata = false;
-                 x.SaveToken = true;
-                 x.TokenValidationParameters = new TokenValidationParameters
-                 {
-                     ValidateIssuerSigningKey = true,
-                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration.GetSection("Jwt:Key").Value)),
-                     ValidateIssuer = false,
-                     ValidateAudience = false,
-                     ValidateLifetime = true,
-                     RequireExpirationTime = true,
-                     ClockSkew = TimeSpan.Zero
-                 };
-             });
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("4c6398f3-f5c6-4777-b39f-0e48a59784d7")),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    RequireExpirationTime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
             return services;
         }
-
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {

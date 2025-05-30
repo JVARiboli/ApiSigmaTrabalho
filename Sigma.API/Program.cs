@@ -1,46 +1,61 @@
 using AutoMapper;
+using Microsoft.OpenApi.Models;
 using Sigma.Infra.CrossCutting.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configuration = builder.Configuration;
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddApplicationContext(configuration.GetValue<string>("ConnectionStrings:Database")!);
-
-MapperConfiguration mapperConfiguration = new MapperConfiguration(cfg =>
+builder.Services.AddSwaggerGen(c =>
 {
-    cfg.AddMaps(new[] { "Sigma.Application" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Projetos.Api", Version = "v1" });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                Array.Empty<string>()
+            }
+        });
+});
+
+var configuration = builder.Configuration;
+
+
+
+MapperConfiguration mapperConfiguration = new MapperConfiguration(mapperConfig => {
+    mapperConfig.AddMaps(new[] { "Sigma.Application" });
 });
 builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
-
-ContainerService.AddApplicationServicesCollentions(builder.Services);
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
-
-ContainerService.AddApplicationAuthentication(builder.Services, configuration);
-
-builder.Services.AddAuthorization();
+builder.Services.AddApplicationContext(configuration.GetValue<string>("ConnectionStrings:Database")!);
+builder.Services.AddApplicationServicesCollentions(configuration);
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
-app.UseRouting();
-app.UseCors("AllowAllOrigins");
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

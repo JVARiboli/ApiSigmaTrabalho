@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Sigma.Application.Interfaces;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -23,7 +25,8 @@ public class AutenticacaoService : IAutenticacaoService
 		{
 			Subject = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, username) }),
 			Expires = DateTime.UtcNow.AddHours(1),
-			SigningCredentials = new SigningCredentials(
+            NotBefore = DateTime.UtcNow.ToLocalTime(),
+            SigningCredentials = new SigningCredentials(
 				new SymmetricSecurityKey(key),
 				SecurityAlgorithms.HmacSha256Signature
 			)
@@ -31,5 +34,5 @@ public class AutenticacaoService : IAutenticacaoService
 
 		var token = tokenHandler.CreateToken(tokenDescriptor);
 		return tokenHandler.WriteToken(token);
-	}
+    }
 }
