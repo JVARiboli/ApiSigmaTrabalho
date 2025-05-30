@@ -2,7 +2,7 @@
 
 namespace Sigma.Application.Dtos
 {
-    public class ProjetosDto
+    public class ProjetosDTo
     {
         public long Id { get; set; }
         public string? Nome { get; set; }

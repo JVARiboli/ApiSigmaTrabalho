@@ -13,7 +13,7 @@ namespace Sigma.Application.Services
         private readonly IMapper _mapper;
         private readonly IProjetoRepository _projetoRepository;
 
-        private readonly StatusDoProjeto[] StatusRestritosExclusao = new StatusDoProjeto[]
+        private readonly StatusDoProjeto[] StatusRestritos = new StatusDoProjeto[]
         {
             StatusDoProjeto.Iniciado,
             StatusDoProjeto.Planejado,
@@ -27,20 +27,20 @@ namespace Sigma.Application.Services
             _projetoRepository = projetoRepository;
         }
 
-        public async Task<bool> Inserir(ProjetoNovoDto model)
+        public async Task<bool> Inserir(ProjetoNovoDTo model)
         {
             var projeto = _mapper.Map<Projetos>(model);
             projeto.Status = StatusDoProjeto.EmAnalise;
             return await _projetoRepository.Inserir(projeto);
         }
 
-        public async Task<bool> Atualizar(ProjetoAtualizarDto model)
+        public async Task<bool> Atualizar(ProjetoAtualizarDTo model)
         {
             var projetoExistente = await _projetoRepository.BuscarPorId(model.Id);
             if (projetoExistente == null)
-                throw new Exception("Projeto não encontrado");
+                throw new Exception("O Projeto não foi encontrado");
 
-            var projetoAtualizado = _mapper.Map<ProjetoAtualizarDto, Projetos>(model, projetoExistente);
+            var projetoAtualizado = _mapper.Map<ProjetoAtualizarDTo, Projetos>(model, projetoExistente);
 
             return await _projetoRepository.Atualizar(projetoAtualizado);
         }
@@ -51,22 +51,28 @@ namespace Sigma.Application.Services
             if (projeto == null)
                 throw new Exception("O Projeto não foi encontrado");
 
-            if (Array.Exists(StatusRestritosExclusao, s => s == projeto.Status))
-                throw new Exception($"Exclusão não permitida para projetos com status '{projeto.Status}'");
+            if (Array.Exists(StatusRestritos, s => s == projeto.Status))
+                throw new Exception($"A Exclusão do projeto não permitida para projetos com o status '{projeto.Status}'");
 
             return await _projetoRepository.Excluir(id);
         }
 
-        public async Task<List<ProjetosDto>> BuscarTodos()
+        public async Task<List<ProjetosDTo>> BuscarTodos()
         {
             var projetos = await _projetoRepository.BuscarTodos();
-            return _mapper.Map<List<ProjetosDto>>(projetos);
+            return _mapper.Map<List<ProjetosDTo>>(projetos);
         }
 
-        public async Task<ProjetosDto> BuscarPorId(long id)
+        public async Task<ProjetosDTo> BuscarPorId(long id)
         {
             var projetos = await _projetoRepository.BuscarPorId(id);
-            return _mapper.Map<ProjetosDto>(projetos);
+            return _mapper.Map<ProjetosDTo>(projetos);
         }
-    }
+
+		public async Task<List<ProjetosDTo>> BuscarPorNomeStatus(string nome, StatusDoProjeto? status)
+		{
+			var projetos = await _projetoRepository.BuscarPorNomeStatus(nome, status);
+			return _mapper.Map<List<ProjetosDTo>>(projetos);
+		}
+	}
 }

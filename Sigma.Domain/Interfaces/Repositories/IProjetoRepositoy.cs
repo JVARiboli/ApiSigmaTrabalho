@@ -1,4 +1,5 @@
 ﻿using Sigma.Domain.Entities;
+using Sigma.Domain.Enums;
 
 namespace Sigma.Domain.Interfaces.Repositories
 {
@@ -9,5 +10,6 @@ namespace Sigma.Domain.Interfaces.Repositories
         Task<bool> Excluir(long id);
         Task<List<Projetos>> BuscarTodos();
         Task<Projetos> BuscarPorId(long id);
-    }
+		Task<List<Projetos>> BuscarPorNomeStatus(string nome, StatusDoProjeto? status);
+	}
 }

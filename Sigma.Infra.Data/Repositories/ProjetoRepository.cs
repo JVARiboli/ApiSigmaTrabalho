@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sigma.Domain.Entities;
+using Sigma.Domain.Enums;
 using Sigma.Domain.Interfaces.Repositories;
 using Sigma.Infra.Data.Context;
 
@@ -47,6 +48,19 @@ namespace Sigma.Infra.Data.Repositories
         public async Task<Projetos> BuscarPorId(long id)
         {
             return await _dbContext.Projeto.FindAsync(id);
-        }
-    }
+		}
+
+		public async Task<List<Projetos>> BuscarPorNomeStatus(string nome, StatusDoProjeto? status)
+		{
+			var query = _dbContext.Projeto.AsQueryable();
+
+			if (!string.IsNullOrEmpty(nome))
+				query = query.Where(p => p.Nome.Contains(nome));
+
+			if (status.HasValue)
+				query = query.Where(p => p.Status == status.Value);
+
+			return await query.ToListAsync();
+		}
+	}
 }

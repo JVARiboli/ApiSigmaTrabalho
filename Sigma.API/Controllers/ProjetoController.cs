@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Sigma.Application.Dtos;
 using Sigma.Application.Interfaces;
 using Sigma.Domain.Dtos;
+using Sigma.Domain.Enums;
 
 namespace Sigma.API.Controllers
 {
@@ -15,15 +17,18 @@ namespace Sigma.API.Controllers
         {
             _projetoService = projetoService;
         }
-        [HttpPost("inserir")]
-        public async Task<IActionResult> Inserir([FromBody] ProjetoNovoDto model)
+
+		[Authorize]
+		[HttpPost("inserir")]
+		public async Task<IActionResult> Inserir([FromBody] ProjetoNovoDTo model)
         {
             var result = await _projetoService.Inserir(model);
             return result ? Ok() : BadRequest();
         }
 
-        [HttpPut("alterar")]
-        public async Task<IActionResult> Alterar([FromBody] ProjetoAtualizarDto model)
+		[Authorize]
+		[HttpPut("alterar")]
+		public async Task<IActionResult> Alterar([FromBody] ProjetoAtualizarDTo model)
         {
             try
             {
@@ -36,8 +41,9 @@ namespace Sigma.API.Controllers
             }
         }
 
-        [HttpDelete("excluir/{id:long}")]
-        public async Task<IActionResult> Excluir(long id)
+		[Authorize]
+		[HttpDelete("excluir")]
+		public async Task<IActionResult> Excluir(long id)
         {
             try
             {
@@ -50,14 +56,21 @@ namespace Sigma.API.Controllers
             }
         }
 
-        [HttpGet("buscar/{id:long}")]
+        [HttpGet("buscar-por-id")]
         public async Task<IActionResult> Buscar(long id)
         {
             var projetos = await _projetoService.BuscarPorId(id);
             return Ok(projetos);
         }
 
-        [HttpGet("buscar")]
+		[HttpGet("buscar-nome-status")]
+		public async Task<IActionResult> Buscar([FromQuery] string nome, [FromQuery] StatusDoProjeto status)
+		{
+			var projetos = await _projetoService.BuscarPorNomeStatus(nome, status);
+			return Ok(projetos);
+		}
+
+		[HttpGet("buscar")]
         public async Task<IActionResult> BuscarTodos()
         {
             var projetos = await _projetoService.BuscarTodos();

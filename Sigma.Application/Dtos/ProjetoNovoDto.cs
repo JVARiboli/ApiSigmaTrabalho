@@ -2,7 +2,7 @@
 
 namespace Sigma.Domain.Dtos
 {
-    public class ProjetoNovoDto
+    public class ProjetoNovoDTo
     {
         public string? Nome { get; set; }
         public string? Descricao { get; set; }

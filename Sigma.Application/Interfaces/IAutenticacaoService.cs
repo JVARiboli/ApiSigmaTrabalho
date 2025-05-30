@@ -4,6 +4,6 @@ namespace Sigma.Application.Interfaces
 {
     public interface IAutenticacaoService
     {
-        Task<string> Authenticate(LoginDto login);
+        public string GerarToken(string username);
     }
 }

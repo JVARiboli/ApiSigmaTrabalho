@@ -1,12 +1,16 @@
 using AutoMapper;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
+using Sigma.Application.Interfaces;
 using Sigma.Infra.CrossCutting.IoC;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var secret = builder.Configuration["Jwt:Key"] ??
+	throw new Exception("Jwt:Key não configurada");
+var key = Encoding.ASCII.GetBytes(secret);
 
 var configuration = builder.Configuration;
 
@@ -18,55 +22,48 @@ builder.Services.AddApplicationContext(configuration.GetValue<string>("Connectio
 
 MapperConfiguration mapperConfiguration = new MapperConfiguration(mapperConfig =>
 {
-    mapperConfig.AddMaps(new[] { "Sigma.Application" });
+	mapperConfig.AddMaps(new[] { "Sigma.Application" });
 });
 builder.Services.AddSingleton(mapperConfiguration.CreateMapper());
 
 ContainerService.AddApplicationServicesCollentions(builder.Services);
 
+builder.Services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins", policy =>
-    {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+	options.AddPolicy("AllowAllOrigins", policy =>
+	{
+		policy.AllowAnyOrigin()
+			  .AllowAnyHeader()
+			  .AllowAnyMethod();
+	});
 });
 
-var key = Encoding.ASCII.GetBytes("12345678901234567890123456789012");
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = false,
+			ValidateAudience = false,
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			IssuerSigningKey = new SymmetricSecurityKey(key),
+			ClockSkew = TimeSpan.Zero
+		};
+	});
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false; 
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,
-        ValidateAudience = false
-    };
-});
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
 app.UseSwagger();
-
 app.UseSwaggerUI();
-
-app.UseDefaultFiles();
-
-app.UseStaticFiles();
 
 app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
