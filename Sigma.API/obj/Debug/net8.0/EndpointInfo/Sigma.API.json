@@ -1,0 +1,335 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Sigma.API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Auth/criar": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginNovoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Projeto/inserir": {
+      "post": {
+        "tags": [
+          "Projeto"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoNovoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoNovoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoNovoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Projeto/listar": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Projeto/excluir/{id}": {
+      "delete": {
+        "tags": [
+          "Projeto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Projeto/alterar/{id}": {
+      "put": {
+        "tags": [
+          "Projeto"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoEditarDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoEditarDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjetoEditarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Projeto/filtro": {
+      "get": {
+        "tags": [
+          "Projeto"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/StatusProjetoEnumNullable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginNovoDto": {
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "senha": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjetoEditarDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "previsaoTermino": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orcamentoTotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "risco": {
+            "$ref": "#/components/schemas/RiscoEnumNullable"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusProjetoEnumNullable"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjetoNovoDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataInicio": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "previsaoTermino": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orcamentoTotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "risco": {
+            "$ref": "#/components/schemas/RiscoEnumNullable"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusProjetoEnumNullable"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RiscoEnumNullable": {
+        "enum": [
+          0,
+          1,
+          2,
+          null
+        ],
+        "type": "integer",
+        "format": "int32",
+        "nullable": true
+      },
+      "StatusProjetoEnumNullable": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          null
+        ],
+        "type": "integer",
+        "format": "int32",
+        "nullable": true
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Informe o token JWT: Bearer {seu token}",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

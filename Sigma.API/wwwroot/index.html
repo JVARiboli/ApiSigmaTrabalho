@@ -1,18 +1,256 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <title>Login - Gerenciamento de Projetos</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Front</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            margin: 0;
+            background: #f9fafb;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        h1 {
+            margin-bottom: 2rem;
+            color: #111827;
+        }
+        form, .token-section, .project-section {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+        }
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+        }
+        button {
+            margin-top: 1rem;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            width: 100%;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .project-list {
+            margin-top: 1rem;
+        }
+        .project-card {
+            background: #f3f4f6;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            border-radius: 0.375rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>SIGMA FRONT</h1>
+
+    <form id="registerForm">
+        <h2>Registrar</h2>
+        <label for="regUsuario">Usuario</label>
+        <input type="text" id="regUsuario" required>
+        <label for="regSenha">Senha</label>
+        <input type="password" id="regSenha" required>
+        <button type="submit">Registrar</button>
+    </form>
+
     <form id="loginForm">
-        <input type="text" id="username" name="username" placeholder="UsuÃ¡rio" required />
-        <input type="password" id="password" name="password" placeholder="Senha" required />
+        <h2>Login</h2>
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" required>
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" required>
         <button type="submit">Entrar</button>
     </form>
 
-    <script src="app.js"></script>
+    <div class="token-section" style="display:none">
+        <h2>Token Recebido</h2>
+        <p id="tokenDisplay"></p>
+    </div>
+
+    <div class="project-section" style="display:none">
+        <h2>Projetos</h2>
+
+        <form id="formProjeto">
+            <h2>Criar Projeto</h2>
+            <label for="nomeProjeto">Nome do Projeto</label>
+            <input type="text" id="nomeProjeto" required>
+
+            <label for="statusProjeto">Status</label>
+            <select id="statusProjeto">
+                <option value="0">Em Analise</option>
+                <option value="1">Analise Realizada</option>
+                <option value="2">Analise Aprovada</option>
+                <option value="3">Iniciado</option>
+                <option value="4">Planejado</option>
+                <option value="5">Em Andamento</option>
+                <option value="6">Encerrado</option>
+                <option value="7">Cancelado</option>
+            </select>
+            <button type="submit">Criar Projeto</button>
+        </form>
+
+        <form id="filtroForm">
+            <label for="filtroNome">Filtrar por Nome</label>
+            <input type="text" id="filtroNome">
+            <label for="filtroStatus">Filtrar por Status</label>
+            <select id="filtroStatus">
+                <option value="0">Em Analise</option>
+                <option value="1">Analise Realizada</option>
+                <option value="2">Analise Aprovada</option>
+                <option value="3">Iniciado</option>
+                <option value="4">Planejado</option>
+                <option value="5">Em Andamento</option>
+                <option value="6">Encerrado</option>
+                <option value="7">Cancelado</option>
+            </select>
+            <button type="button" onclick="filtrarProjetos()">Filtrar</button>
+        </form>
+
+        <button onclick="buscarProjetos()">Buscar Todos</button>
+        <div class="project-list" id="listaProjetos"></div>
+    </div>
+
+    <script>
+        let token = null;
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usuario = document.getElementById('regUsuario').value;
+            const senha = document.getElementById('regSenha').value;
+            const res = await fetch('/api/autenticacao/adicionar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ usuario, senha })
+            });
+            alert(res.ok ? 'Usuário cadastrado com sucesso!' : 'Erro ao cadastrar.');
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const usuario = document.getElementById('usuario').value;
+            const senha = document.getElementById('senha').value;
+
+            const response = await fetch('/api/autenticacao/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ usuario, senha })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                token = data.token;
+                document.querySelector('.token-section').style.display = 'block';
+                document.getElementById('tokenDisplay').textContent = token;
+                document.querySelector('.project-section').style.display = 'block';
+            } else {
+                alert('Login inválido');
+            }
+        });
+
+        document.getElementById('formProjeto').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('nomeProjeto').value;
+            const status = parseInt(document.getElementById('statusProjeto').value);
+            const res = await fetch('/api/projetos/inserir', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nome, status })
+            });
+            if (res.ok) {
+                alert('Projeto criado!');
+                buscarProjetos();
+            } else {
+                alert('Erro ao criar projeto.');
+            }
+        });
+
+        async function buscarProjetos() {
+            const response = await fetch('/api/projetos/buscar-todos', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const container = document.getElementById('listaProjetos');
+            container.innerHTML = '';
+
+            if (response.ok) {
+                const projetos = await response.json();
+                projetos.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'project-card';
+                    div.innerHTML = `
+                        <strong>${p.nome}</strong><br>Status: ${p.status}<br>
+                        <button onclick="removerProjeto(${p.id})">Remover</button>
+                    `;
+                    container.appendChild(div);
+                });
+            } else {
+                container.innerHTML = '<p>Erro ao buscar projetos.</p>';
+            }
+        }
+
+        async function removerProjeto(id) {
+            if (!confirm('Deseja realmente remover este projeto?')) return;
+            const res = await fetch(`/api/projetos/remover-projeto/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) buscarProjetos();
+            else alert('Erro ao remover projeto.');
+        }
+
+        async function filtrarProjetos() {
+            const nome = document.getElementById('filtroNome').value;
+            const status = document.getElementById('filtroStatus').value;
+            const query = new URLSearchParams();
+            if (nome) query.append('nome', nome);
+            if (status !== '') query.append('status', status);
+
+            const res = await fetch(`/api/projetos/buscar-por-nome-status?${query.toString()}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const container = document.getElementById('listaProjetos');
+            container.innerHTML = '';
+
+            if (res.ok) {
+                const projetos = await res.json();
+                projetos.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'project-card';
+                    div.innerHTML = `<strong>${p.nome}</strong><br>Status: ${p.status}`;
+                    container.appendChild(div);
+                });
+            } else {
+                alert('Erro ao filtrar projetos.');
+            }
+        }
+    </script>
 </body>
 </html>

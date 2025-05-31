@@ -9,9 +9,13 @@ namespace Sigma.Application.Mappers
     {
         public ProjetoMapper()
         {
-            CreateMap<ProjetoNovoDTo, Projetos>();
-            CreateMap<ProjetoAtualizarDTo, Projetos>();
-            CreateMap<Projetos, ProjetosDTo>();
-        }
+            CreateMap<ProjetoNovoDto, Projeto>();
+
+			CreateMap<Projeto, ProjetoDto>();
+
+			CreateMap<ProjetoDto, Projeto>();
+		}
     }
 }
+
+

@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\usuario\\OneDrive\\Área de Trabalho\\sigma-main\\Sigma.API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Sigma.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Sigma.API.props",
+      "PackagePath": "build\\Sigma.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Sigma.API.props",
+      "PackagePath": "buildMultiTargeting\\Sigma.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Sigma.API.props",
+      "PackagePath": "buildTransitive\\Sigma.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

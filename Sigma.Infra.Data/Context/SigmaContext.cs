@@ -7,7 +7,15 @@ namespace Sigma.Infra.Data.Context
     public class SigmaContext : DbContext
     {
         public SigmaContext(DbContextOptions<SigmaContext> options) : base(options) { }
-        public DbSet<Projetos> Projeto { get; set; }        
+
+        #region DbSet
+
+        public DbSet<Projeto> Projetos { get; set; }        
+        public DbSet<Login> Logins { get; set; }
+
+        #endregion
+
+        #region OnModelCreating
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,6 +45,6 @@ namespace Sigma.Infra.Data.Context
             }
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-
+        #endregion
     }
 }

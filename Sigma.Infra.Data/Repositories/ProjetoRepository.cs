@@ -14,45 +14,18 @@ namespace Sigma.Infra.Data.Repositories
         {
             _dbContext = dbContext;
         }
-
-        public async Task<bool> Inserir(Projetos entidade)
-        {
-           await _dbContext.Set<Projetos>().AddAsync(entidade);
-           await _dbContext.SaveChangesAsync();
-           return true;
-        }
-
-        public async Task<bool> Atualizar(Projetos entidade)
-        {
-            _dbContext.Set<Projetos>().Update(entidade);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> Excluir(long id)
-        {
-            var projeto = await _dbContext.Projeto.FindAsync(id);
-            if (projeto == null)
-                return false;
-
-            _dbContext.Projeto.Remove(projeto);
-            await _dbContext.SaveChangesAsync();
-            return true;
-        }
-
-        public async Task<List<Projetos>> BuscarTodos()
-        {
-            return await _dbContext.Projeto.ToListAsync();
-        }
-
-        public async Task<Projetos> BuscarPorId(long id)
-        {
-            return await _dbContext.Projeto.FindAsync(id);
+		public async Task<List<Projeto>> ObterTodos()
+		{
+			return await _dbContext.Projetos.ToListAsync();
 		}
 
-		public async Task<List<Projetos>> BuscarPorNomeStatus(string nome, StatusDoProjeto? status)
+		public async Task<Projeto> ObterPorId(long id)
 		{
-			var query = _dbContext.Projeto.AsQueryable();
+			return await _dbContext.Projetos.FindAsync(id);
+		}
+		public async Task<IEnumerable<Projeto>> ObterPorNomeStatus(string? nome, StatusDoProjetoEnum? status)
+		{
+			var query = _dbContext.Projetos.AsQueryable();
 
 			if (!string.IsNullOrEmpty(nome))
 				query = query.Where(p => p.Nome.Contains(nome));
@@ -62,5 +35,31 @@ namespace Sigma.Infra.Data.Repositories
 
 			return await query.ToListAsync();
 		}
-	}
+		
+        public async Task<bool> Excluir(long id)
+		{
+            var projeto = await _dbContext.Projetos.FindAsync(id);
+
+            _dbContext.Projetos.Remove(projeto);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<bool> Adicionar(Projeto entidade)
+        {
+            if (entidade.Status == StatusDoProjetoEnum.Encerrado)
+                entidade.DataRealTermino = DateTime.UtcNow;            
+
+            await _dbContext.Set<Projeto>().AddAsync(entidade);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task Atualizar(Projeto projeto)
+        {
+            _dbContext.Projetos.Update(projeto);
+            await _dbContext.SaveChangesAsync();
+        }
+    }
 }

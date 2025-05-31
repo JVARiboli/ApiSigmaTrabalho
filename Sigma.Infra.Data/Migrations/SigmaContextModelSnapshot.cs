@@ -22,7 +22,7 @@ namespace Sigma.Infra.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Sigma.Domain.Entities.Projetos", b =>
+            modelBuilder.Entity("Sigma.Domain.Entities.Login", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,17 +31,38 @@ namespace Sigma.Infra.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("ClassificacaoRisco")
-                        .HasColumnType("integer")
-                        .HasColumnName("classificacaorisco");
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("senha");
+
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("usuario");
+
+                    b.HasKey("Id")
+                        .HasName("pk_logins");
+
+                    b.ToTable("logins");
+                });
+
+            modelBuilder.Entity("Sigma.Domain.Entities.Projeto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("datainicio");
 
-                    b.Property<DateTime?>("DataTerminoReal")
+                    b.Property<DateTime?>("DataRealTermino")
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("dataterminoreal");
+                        .HasColumnName("datarealtermino");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("text")
@@ -51,22 +72,26 @@ namespace Sigma.Infra.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("nome");
 
-                    b.Property<decimal>("OrcamentoTotal")
+                    b.Property<decimal>("Orcamento")
                         .HasColumnType("numeric")
-                        .HasColumnName("orcamentototal");
+                        .HasColumnName("orcamento");
 
                     b.Property<DateTime>("PrevisaoTermino")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("previsaotermino");
+
+                    b.Property<int>("Risco")
+                        .HasColumnType("integer")
+                        .HasColumnName("risco");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
                     b.HasKey("Id")
-                        .HasName("pk_projeto");
+                        .HasName("pk_projetos");
 
-                    b.ToTable("projeto");
+                    b.ToTable("projetos");
                 });
 #pragma warning restore 612, 618
         }

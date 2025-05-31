@@ -1,0 +1,29 @@
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.deps.json
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.runtimeconfig.json
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.csproj.AssemblyReference.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.AssemblyInfoInputs.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.AssemblyInfo.cs
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.csproj.CoreCompileInputs.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\refint\Sigma.Domain.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.genruntimeconfig.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Domain\obj\Debug\net8.0\ref\Sigma.Domain.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.deps.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.runtimeconfig.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\bin\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.csproj.AssemblyReference.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.AssemblyInfoInputs.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.AssemblyInfo.cs
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.csproj.CoreCompileInputs.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.sourcelink.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\refint\Sigma.Domain.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\Sigma.Domain.genruntimeconfig.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Domain\obj\Debug\net8.0\ref\Sigma.Domain.dll

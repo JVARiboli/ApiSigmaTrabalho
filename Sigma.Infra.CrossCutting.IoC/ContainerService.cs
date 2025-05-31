@@ -1,66 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Sigma.Application.Interfaces;
 using Sigma.Application.Services;
 using Sigma.Domain.Interfaces.Repositories;
 using Sigma.Infra.Data.Context;
 using Sigma.Infra.Data.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-
 
 namespace Sigma.Infra.CrossCutting.IoC
 {
-
     public static class ContainerService
     {
-        public static IServiceCollection AddApplicationServicesCollentions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddApplicationServicesCollections(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddServices();
             services.AddRepositories();
-            services.AddApplicationAuthentication(configuration);
+            services.AddJwtAuthentication(configuration);
             return services;
         }
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IProjetoService, ProjetoService>();
-            services.AddScoped<IAutenticacaoService, AutenticacaoService>();
-            
-            return services;
-        }
-
-        public static IServiceCollection AddApplicationAuthentication(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("4c6398f3-f5c6-4777-b39f-0e48a59784d7")),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    RequireExpirationTime = true,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ILoginService, LoginService>();
             return services;
         }
 
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IProjetoRepository, ProjetoRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
             return services;
         }
 
@@ -68,6 +41,31 @@ namespace Sigma.Infra.CrossCutting.IoC
         {
             services.AddDbContext<SigmaContext>(options => options.UseNpgsql(connectionString, b => b.MigrationsAssembly("Sigma.Infra.Data")));
             return services;
-        }        
+        }
+
+        public static IServiceCollection AddJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"] ?? 
+                throw new InvalidOperationException("Chave JWT não configurada"));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                };
+            });
+
+            return services;
+        }
     }
 }

@@ -7,74 +7,67 @@ using Sigma.Domain.Enums;
 
 namespace Sigma.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProjetoController : ControllerBase
-    {
-        private readonly IProjetoService _projetoService;
+	[Authorize]
+	[ApiController]
+	[Route("api/projetos")]
+	public class ProjetoController : ControllerBase
+	{
+		private readonly IConfiguration _configuration;
+		private readonly IProjetoService _projetoService;
 
-        public ProjetoController(IProjetoService projetoService)
-        {
-            _projetoService = projetoService;
-        }
+		public ProjetoController(IConfiguration configuration, IProjetoService projetoService)
+		{
+			_configuration = configuration;
+			_projetoService = projetoService;
+		}
 
 		[Authorize]
 		[HttpPost("inserir")]
-		public async Task<IActionResult> Inserir([FromBody] ProjetoNovoDTo model)
-        {
-            var result = await _projetoService.Inserir(model);
-            return result ? Ok() : BadRequest();
-        }
-
-		[Authorize]
-		[HttpPut("alterar")]
-		public async Task<IActionResult> Alterar([FromBody] ProjetoAtualizarDTo model)
-        {
-            try
-            {
-                var result = await _projetoService.Atualizar(model);
-                return result ? Ok() : BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-		[Authorize]
-		[HttpDelete("excluir")]
-		public async Task<IActionResult> Excluir(long id)
-        {
-            try
-            {
-                var result = await _projetoService.Excluir(id);
-                return result ? Ok() : NotFound();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpGet("buscar-por-id")]
-        public async Task<IActionResult> Buscar(long id)
-        {
-            var projetos = await _projetoService.BuscarPorId(id);
-            return Ok(projetos);
-        }
-
-		[HttpGet("buscar-nome-status")]
-		public async Task<IActionResult> Buscar([FromQuery] string nome, [FromQuery] StatusDoProjeto status)
+		public async Task<IActionResult> CriarProjeto([FromBody] ProjetoNovoDto model)
 		{
-			var projetos = await _projetoService.BuscarPorNomeStatus(nome, status);
-			return Ok(projetos);
+			var resultado = await _projetoService.Adicionar(model);
+			return Ok(resultado);
 		}
 
-		[HttpGet("buscar")]
-        public async Task<IActionResult> BuscarTodos()
-        {
-            var projetos = await _projetoService.BuscarTodos();
-            return Ok(projetos);
-        }
-    }
+		[HttpGet("buscar-todos")]
+		public async Task<IActionResult> ObterTodos()
+		{
+			var resultado = await _projetoService.ObterTodos();
+			return Ok(resultado);
+		}
+
+		[Authorize]
+		[HttpDelete("remover-projeto/{id:long}")]
+		public async Task<IActionResult> RemoverProjeto(long id)
+		{
+			try
+			{
+				await _projetoService.Excluir(id);
+				return NoContent();
+			}
+			catch (InvalidOperationException ex)
+			{
+				return BadRequest(new { mensagem = ex.Message });
+			}
+			catch (KeyNotFoundException ex)
+			{
+				return NotFound(new { mensagem = ex.Message });
+			}
+		}
+
+		[Authorize]
+		[HttpPut("atualizar-projeto/{id:long}")]
+		public async Task<IActionResult> AtualizarProjeto(long id, [FromBody] ProjetoNovoDto dto)
+		{
+			await _projetoService.Alterar(id, dto);
+			return NoContent();
+		}
+
+		[HttpGet("buscar-por-nome-status")]
+		public async Task<IActionResult> ConsultarPorNomeStatus([FromQuery] string? nome, [FromQuery] StatusDoProjetoEnum? status)
+		{
+			var projetos = await _projetoService.ConsultarPorNomeStatus(nome, status);
+			return Ok(projetos);
+		}
+	}
 }

@@ -1,0 +1,43 @@
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.deps.json
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.runtimeconfig.json
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Application.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Domain.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.Data.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Application.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.Data.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.csproj.AssemblyReference.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.AssemblyInfoInputs.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.AssemblyInfo.cs
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.csproj.CoreCompileInputs.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.In.71169759.Up2Date
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\refint\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.pdb
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.genruntimeconfig.cache
+C:\Users\root\Desktop\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\ref\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.deps.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.runtimeconfig.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Application.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Domain.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.Data.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Application.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Domain.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\bin\Debug\net8.0\Sigma.Infra.Data.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.csproj.AssemblyReference.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.AssemblyInfoInputs.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.AssemblyInfo.cs
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.csproj.CoreCompileInputs.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.sourcelink.json
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.In.71169759.Up2Date
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\refint\Sigma.Infra.CrossCutting.IoC.dll
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.pdb
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\Sigma.Infra.CrossCutting.IoC.genruntimeconfig.cache
+C:\Users\usuario\OneDrive\Área de Trabalho\sigma-main\Sigma.Infra.CrossCutting.IoC\obj\Debug\net8.0\ref\Sigma.Infra.CrossCutting.IoC.dll

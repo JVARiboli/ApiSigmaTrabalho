@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "/sL4LDQdz25dpaM33dSsEQcrBhmaSSkNySI4xKqiW9Y=",
+  "Source": "Sigma.API",
+  "BasePath": "_content/Sigma.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "Sigma.API\\wwwroot",
+      "Source": "Sigma.API",
+      "ContentRoot": "C:\\Users\\usuario\\OneDrive\\Área de Trabalho\\sigma-main\\Sigma.API\\wwwroot\\",
+      "BasePath": "_content/Sigma.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\usuario\\OneDrive\\Área de Trabalho\\sigma-main\\Sigma.API\\wwwroot\\index.html",
+      "SourceId": "Sigma.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\usuario\\OneDrive\\Área de Trabalho\\sigma-main\\Sigma.API\\wwwroot\\",
+      "BasePath": "_content/Sigma.API",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}
