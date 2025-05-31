@@ -8,7 +8,7 @@ serviceConfigurator.ConfigureServices();
 
 var app = builder.Build();
 
-var pipelineConfigurator = new SwaggerConfig(app);
-pipelineConfigurator.ConfigurePipeline();
+var swaggerConfigurator = new SwaggerConfig(app);
+swaggerConfigurator.ConfigurePipeline();
 
 app.Run();
